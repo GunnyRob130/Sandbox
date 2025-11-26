@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Print Selected</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  h1 { font-size: 22px; margin-bottom: 10px; }
+  ul { font-size: 16px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<h1>Your Selected Options</h1>
+<ul id="list"></ul>
+
+<script>
+// read query string values
+function qs(key) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(key);
+}
+
+// list of variables and labels
+const items = [
+    { id: "agriculture", label: "Agriculture, Food, and Natural Resources" },
+    { id: "architecture", label: "Architecture and Construction" },
+    { id: "arts", label: "Arts, Audio/Video Technology, and Communications" },
+    { id: "business", label: "Business, Management, and Administration" },
+    { id: "education", label: "Education and Training" },
+    { id: "finance", label: "Finance" },
+    { id: "government", label: "Government and Public Administration" },
+    { id: "health", label: "Health Science" },
+    { id: "humanServices", label: "Human Services" },
+    { id: "informationTech", label: "Information Technology" },
+    { id: "law", label: "Law, Public Safety, Corrections, and Security" },
+    { id: "manufacturing", label: "Manufacturing" },
+    { id: "marketing", label: "Marketing" },
+    { id: "stem", label: "Science, Technology, Engineering, and Mathematics" }
+];
+
+// fill list with selected items
+const ul = document.getElementById("list");
+items.forEach(item => {
+    if (qs(item.id) === "true") {
+        const li = document.createElement("li");
+        li.textContent = item.label;
+        ul.appendChild(li);
+    }
+});
+
+// give browser time to layout before printing
+setTimeout(() => {
+    window.print();
+}, 300);
+
+</script>
+</body>
+</html>
